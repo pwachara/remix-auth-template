@@ -14,7 +14,7 @@ export default function AppShell({
         <ul>
           <li>
             <Link to="/" className="contrast">
-              Remix Auth Starter
+              Service Fee App
             </Link>
           </li>
         </ul>
@@ -23,7 +23,7 @@ export default function AppShell({
             <>
               <li>{user.emailAddress}</li>
               <li>
-                <Link to="/auth/update-password">Update password</Link>
+                <Link to="/auth/update-password">Change password</Link>
               </li>
               <li>
                 <Link to="/auth/register-2fa">2FA</Link>
@@ -49,7 +49,7 @@ export default function AppShell({
         </ul>
       </nav>
       <hr />
-      <main className="container">{children}</main>
+      <main className="container">{children}<h1>This too!</h1></main>
     </>
   );
 }

@@ -7,10 +7,8 @@ import type { MetaFunction } from "remix";
 import AppShell from "~/components/AppShell";
 
 export const meta: MetaFunction = () => {
-  return {
-    title: "Auth Starter - Remix",
-  };
-};
+  return {title: "Service Fee App"}
+}
 
 export const loader: LoaderFunction = async function ({ request }) {
   const { user, newResponseHeaders } = await getUserFromCookies(request);
