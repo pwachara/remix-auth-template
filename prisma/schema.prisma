@@ -20,10 +20,12 @@ model User {
   role                 GlobalRole @default(CUSTOMER)
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
-  membership          Membership[]
-  AuthSession         AuthSession[]
-  PasswordResetTokens PasswordResetTokens[]
-  TwoFactorAuthTokens TwoFactorAuthTokens[]
+  membership           Membership[]          @relation(name: "organization")
+  invitedUsers         Membership[]          @relation(name: "invitee")
+  invitedByUsers       Membership[]          @relation(name: "inviter")
+  AuthSession          AuthSession[]
+  PasswordResetTokens  PasswordResetTokens[]
+  TwoFactorAuthTokens  TwoFactorAuthTokens[]
   @@index([emailAddress])
 }
 
@@ -71,14 +73,23 @@ model Organization {
 }
 
 model Membership {
-  user           User           @relation(fields: [userId], references: [id])
+  id             String @id @default(cuid())
+  user           User?           @relation(name: "organization", fields: [userId], references: [id])
   userId         String
   organization   Organization   @relation(fields: [organizationId], references: [id])
   organizationId String
   role           MembershipRole @default(TENANT)
+  // When the user joins, we will clear out the name and email and set the user.
+  invitedName    String?
+  invitedEmail   String?
+  //To keep track of who invites who and who was invited by who.
+  inviter         User          @relation(name: "inviter", fields: [inviterId], references: [id])
+  inviterId       String
+  invitee         User?         @relation(name: "invitee", fields: [inviteeId], references: [id])
+  inviteeId       String          
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
-  @@id([organizationId, userId])
+  @@unique([organizationId, invitedEmail])
 }
 
 enum GlobalRole {
