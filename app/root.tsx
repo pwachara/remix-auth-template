@@ -36,8 +36,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
           <p>{error.message}</p>
           <hr />
           <p>
-            Hey, developer, you should replace this with what you want your
-            users to see.
+            Sorry! There was an error.  Please call your Administrator to help.
           </p>
         </div>
       </Layout>

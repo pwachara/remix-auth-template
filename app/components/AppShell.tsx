@@ -22,6 +22,9 @@ export default function AppShell({
           {!!user && (
             <>
               <li>{user.emailAddress}</li>
+      
+{/* These are not applicable for the application:
+
               <li>
                 <Link to="/auth/update-password">Change password</Link>
               </li>
@@ -31,6 +34,7 @@ export default function AppShell({
               <li>
                 <Link to="/auth/sessions">Sessions</Link>
               </li>
+*/}
               <li>
                 <Link to="/auth/logout">Sign out</Link>
               </li>
@@ -49,7 +53,7 @@ export default function AppShell({
         </ul>
       </nav>
       <hr />
-      <main className="container">{children}<h1>This too!</h1></main>
+      <main className="container-fluid"><article>{children}</article><h1>This too!</h1></main>
     </>
   );
 }
