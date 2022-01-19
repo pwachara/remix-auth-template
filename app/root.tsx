@@ -9,6 +9,8 @@ import {
   useLoaderData,
 } from "remix";
 
+import { useState } from "react"
+
 import type { MetaFunction } from "remix";
 
 // https://remix.run/api/conventions#default-export
@@ -17,10 +19,8 @@ import type { MetaFunction } from "remix";
 
 export default function App() {
   return (
-    <Document>
-      <Layout>
+    <Document> 
         <Outlet />
-      </Layout>
     </Document>
   );
 }
@@ -87,8 +87,11 @@ function Document({
   children: React.ReactNode;
   title?: string;
 }) {
+
+  const [ dataTheme, setDataTheme ] = useState("light")
+  
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -113,7 +116,7 @@ function Document({
     </html>
   );
 }
-
+/* 
 function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
-}
+  return <>{children}<p>This is within the LAYOUT component</p></>;
+} */

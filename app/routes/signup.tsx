@@ -6,7 +6,7 @@ import type { MetaFunction } from "remix";
 import { SignUpSignInForm } from "~/components/SignUpSignInForm";
 import { signUserIn } from "~/utils/auth/signUserIn";
 import { badRequest } from "~/utils/net";
-import AppShell from "~/components/AppShell";
+import Layout from "~/components/Layout";
 
 export const meta: MetaFunction = () => {
   return {
@@ -57,9 +57,11 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Signup() {
   return (
-    <AppShell>
-      <h1>Sign up for our App!</h1>
-      <SignUpSignInForm buttonText="Sign up!" />
-    </AppShell>
+    <Layout>
+      <main className="container">
+        <h1>Sign up</h1>
+        <SignUpSignInForm buttonText="Sign up!" />
+        </main>
+    </Layout>
   );
 }

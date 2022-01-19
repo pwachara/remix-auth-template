@@ -8,7 +8,7 @@ import {
   useLoaderData,
   useTransition,
 } from "remix";
-import AppShell from "~/components/AppShell";
+import Layout from "~/components/Layout";
 import {
   authenticateUser,
   updateUserPassword,
@@ -108,7 +108,7 @@ export default function UpdatePassword() {
     (submission.state === "loading" && submission.type === "actionRedirect");
 
   return (
-    <AppShell user={user}>
+    <Layout user={user}>
       <h1>Update your password!</h1>
       {formData?.formError && <mark>{formData.formError}</mark>}
       <Form method="post">
@@ -156,6 +156,6 @@ export default function UpdatePassword() {
         </button>
       </Form>
       {formData?.success && <p>Your password has been updated.</p>}
-    </AppShell>
+    </Layout>
   );
 }

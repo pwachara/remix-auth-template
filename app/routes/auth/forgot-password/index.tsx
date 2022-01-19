@@ -14,6 +14,7 @@ import { createResetPasswordToken } from "~/utils/auth/tokens.server";
 import { hashToken } from "~/utils/hash.server";
 import { sendForgotPasswordEmail } from "~/utils/mail.server";
 import { db } from "~/utils/prisma.server";
+import Layout from "~/components/Layout"
 
 export const meta: MetaFunction = () => ({
   title: "Forgot password",
@@ -38,7 +39,7 @@ export const action: ActionFunction = async function ({ request }) {
     const token = createResetPasswordToken();
     // Store a hash of the token in the DB tied to the user and an expiration
     const tokenHash = hashToken(token);
-    const tokenExpiry = addHours(new Date(), 24);
+    const tokenExpiry = addHours(new Date(), 1); //token to expire within 1 hour
 
     try {
       await db.passwordResetTokens.create({
@@ -69,32 +70,34 @@ export default function ForgotPassword() {
   const submission = useTransition();
   const formData = useActionData();
   return (
-    <main className="container">
-      <Form method="post">
-        {formData?.fieldErrors?.email && (
-          <mark>{formData.fieldErrors.email}</mark>
-        )}
-        <label htmlFor="email">
-          Email address
-          <input
-            type="email"
-            placeholder="my.name@example.com"
-            name="email"
+    <Layout> 
+      <main className="container">
+        <Form method="post">
+          {formData?.fieldErrors?.email && (
+            <mark>{formData.fieldErrors.email}</mark>
+            )}
+          <label htmlFor="email">
+            Email address
+            <input
+              type="email"
+              placeholder="my.name@example.com"
+              name="email"
+              disabled={submission.state === "submitting"}
+              aria-invalid={!!formData?.fieldErrors?.email || undefined}
+              />
+          </label>
+          <button
+            type="submit"
+            aria-busy={
+              submission.state === "submitting" || submission.state === "loading"
+            }
             disabled={submission.state === "submitting"}
-            aria-invalid={!!formData?.fieldErrors?.email || undefined}
-          />
-        </label>
-        <button
-          type="submit"
-          aria-busy={
-            submission.state === "submitting" || submission.state === "loading"
-          }
-          disabled={submission.state === "submitting"}
-        >
-          Send forgot password link
-        </button>
-      </Form>
-      {formData?.alert && <p>{formData.alert}</p>}
-    </main>
+            >
+            Send forgot password link
+          </button>
+        </Form>
+        {formData?.alert && <p>{formData.alert}</p>}
+      </main>
+    </Layout>
   );
 }

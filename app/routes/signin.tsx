@@ -7,7 +7,7 @@ import type { MetaFunction } from "remix";
 import { SignUpSignInForm } from "~/components/SignUpSignInForm";
 import { badRequest } from "~/utils/net";
 import { db } from "~/utils/prisma.server";
-import AppShell from "~/components/AppShell";
+import Layout from "~/components/Layout";
 
 export const meta: MetaFunction = () => {
   return {
@@ -96,10 +96,12 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Signin() {
   return (
-    <AppShell>
-      <h1>Sign in to our App!</h1>
+    <Layout>
+      <main className="container">
+      <h1>Sign in</h1>
       <SignUpSignInForm buttonText="Sign in!" />
       <a href="/auth/forgot-password">Forgot password?</a>
-    </AppShell>
+      </main>
+    </Layout>
   );
 }

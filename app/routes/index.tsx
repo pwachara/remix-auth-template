@@ -1,13 +1,18 @@
-import { json, LoaderFunction, useLoaderData } from "remix";
+import { json, LoaderFunction, useLoaderData, Outlet, LinksFunction } from "remix";
 import {
   getUserFromCookies,
   UserWithoutPassword,
 } from "~/utils/auth/user.server";
 import type { MetaFunction } from "remix";
-import AppShell from "~/components/AppShell";
+import Layout from "~/components/Layout";
+import styles from "~/app/styles/global.css"
 
 export const meta: MetaFunction = () => {
   return {title: "Service Fee App"}
+}
+
+export const links: LinksFunction = () => {
+  return [ {rel: "stylesheet", href: styles }]
 }
 
 export const loader: LoaderFunction = async function ({ request }) {
@@ -25,17 +30,39 @@ export default function Index() {
   const { user }: { user: UserWithoutPassword | undefined } = useLoaderData();
 
   return (
-    <AppShell user={user}>
-      {!user && <h1>Welcome!</h1>}
+    <Layout user={user}>
+
+      {!user && (
+      <hgroup>
+        <h1>Thank you for choosing the Service Fee App</h1>
+        <h2>We promise to deliver our best</h2>
+      </hgroup>)}
+      
       {user && (
-        <hgroup>
-          <h1>Welcome back!</h1>
-          <h2>{user?.emailAddress}</h2>
-        </hgroup>
+          <section>
+            <div className="grid">
+              <article className="left-menu" >
+                
+                  <p>One</p>
+                  <p>Two</p>
+                  <p>Three</p>
+                
+              </article>
+              <article>
+                <header>
+                  This is the Menu for This section
+                </header>
+                  Body
+                <footer>
+                  This is the footer
+                </footer>
+              </article>
+            </div>
+          <Outlet />
+          </section>
+        
       )}
-      {user?.emailAddressVerified === false && (
-        <strong>Please verify your email address</strong>
-      )}
-    </AppShell>
+
+    </Layout>
   );
 }

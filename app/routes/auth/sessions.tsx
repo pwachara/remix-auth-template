@@ -8,7 +8,7 @@ import {
   useLoaderData,
 } from "remix";
 import invariant from "tiny-invariant";
-import AppShell from "~/components/AppShell";
+import Layout from "~/components/Layout";
 import {
   formatAuthSessionRes,
   getCurrentSessionId,
@@ -77,7 +77,7 @@ export default function Sessions() {
   } = useLoaderData();
 
   return (
-    <AppShell user={data?.user}>
+    <Layout user={data?.user}>
       <h1>Active sessions</h1>
       <figure>
         <table role="grid">
@@ -120,6 +120,6 @@ export default function Sessions() {
           </tbody>
         </table>
       </figure>
-    </AppShell>
+    </Layout>
   );
 }
