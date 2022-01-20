@@ -10,39 +10,39 @@ export default function Layout({
   user?: { emailAddress: string };
 }) {
   return (
-    <>
-      <nav className="container-fluid">
+    <div className="flex flex-col">
+      <nav className="flex flex-row bg-blue-600 text-white justify-between h-16 p-4">
         <ul>
-          <li>
-            <Link to="/" className="contrast">
+          <li className="text-xl font-bold tracking-wider hover:text-yellow-500">
+            <Link to="/">
               Service Fee App
             </Link>
           </li>
         </ul>
-        <ul>
+        <ul className="flex flex-row text-xl items-center">
           {!!user && (
-            <>
+            <div className="flex space-x-4 items-center">
               <li>{user.emailAddress}</li>
     
-              <li>
+              <li className="px-3 py-3 bg-blue-900 rounded text-slate-100 hover:text-yellow-500">
                 <Link to="/auth/logout">Sign out</Link>
               </li>
-            </>
+            </div>
           )}
           {!!user || (
-            <>
-              <li>
+            <div className="flex flex-row items-center space-x-4 px-2">
+              <li className="px-3 py-3 hover:text-yellow-500">
                 <Link to="/signin">Sign in</Link>
               </li>
-              <li>
+              <li className="px-3 py-3 bg-blue-900 rounded text-slate-100 hover:text-yellow-500">
                 <Link to="/signup">Sign up</Link>
               </li>
-            </>
+            </div>
           )}
         </ul>
       </nav>
-      <hr />
-      <main className="container-fluid">{children} </main>
-    </>
+      
+      <main>{children} </main>
+    </div>
   );
 }

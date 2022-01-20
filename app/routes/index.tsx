@@ -1,18 +1,13 @@
-import { json, LoaderFunction, useLoaderData, Outlet, LinksFunction } from "remix";
+import { json, LoaderFunction, useLoaderData, Outlet,} from "remix";
 import {
   getUserFromCookies,
   UserWithoutPassword,
 } from "~/utils/auth/user.server";
 import type { MetaFunction } from "remix";
 import Layout from "~/components/Layout";
-import styles from "~/app/styles/global.css"
 
 export const meta: MetaFunction = () => {
   return {title: "Service Fee App"}
-}
-
-export const links: LinksFunction = () => {
-  return [ {rel: "stylesheet", href: styles }]
 }
 
 export const loader: LoaderFunction = async function ({ request }) {
@@ -40,7 +35,7 @@ export default function Index() {
       
       {user && (
           <section>
-            <div className="grid">
+            <div className="grid" style={{gridTemplateColumns: "1fr 4fr"}}>
               <article className="left-menu" >
                 
                   <p>One</p>
