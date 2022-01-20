@@ -10,12 +10,12 @@ export default function Layout({
   user?: { emailAddress: string };
 }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen">
       <nav className="flex flex-row bg-blue-600 text-white justify-between h-16 p-4">
         <ul>
           <li className="text-xl font-bold tracking-wider hover:text-yellow-500">
             <Link to="/">
-              Service Fee App
+              Service Charge App
             </Link>
           </li>
         </ul>
@@ -42,7 +42,7 @@ export default function Layout({
         </ul>
       </nav>
       
-      <main>{children} </main>
+      <main className="flex flex-col-1">{children} </main>
     </div>
   );
 }

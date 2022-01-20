@@ -45,6 +45,7 @@ export function SignUpSignInForm({ buttonText }: { buttonText: string }) {
           name="email"
           aria-invalid={!!formData?.fieldErrors?.email || undefined}
           disabled={disabled}
+          className="border-2 border-slate-500 rounded"
         />
 
         {formData?.fieldErrors?.password && (
@@ -58,6 +59,7 @@ export function SignUpSignInForm({ buttonText }: { buttonText: string }) {
           name="password"
           aria-invalid={!!formData?.fieldErrors?.password || undefined}
           disabled={disabled}
+          className="border-2 border-slate-500 rounded"
         />
 
         {formData?.fieldErrors?.token && (
