@@ -57,11 +57,9 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Signup() {
   return (
-    <Layout>
       <main className="container">
         <h1>Sign up</h1>
         <SignUpSignInForm buttonText="Sign up!" />
-        </main>
-    </Layout>
+      </main>
   );
 }

@@ -25,9 +25,9 @@ export function SignUpSignInForm({ buttonText }: { buttonText: string }) {
     (submission.state === "loading" && submission.type === "actionRedirect");
 
   return (
-    <>
+    <div>
       {formData?.formError && <mark>{formData.formError}</mark>}
-      <Form method="post">
+      <Form method="post" className="bg-blue-200">
         <input
           type="hidden"
           name="redirectTo"
@@ -97,6 +97,6 @@ export function SignUpSignInForm({ buttonText }: { buttonText: string }) {
           {buttonText}
         </button>
       </Form>
-    </>
+    </div>
   );
 }

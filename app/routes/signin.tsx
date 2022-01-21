@@ -96,12 +96,10 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Signin() {
   return (
-    <Layout>
-      <main className="container">
+      <main className="flex justify-center items-center min-h-screen bg-cyan-500">
       <h1>Sign in</h1>
       <SignUpSignInForm buttonText="Sign in!" />
       <a href="/auth/forgot-password">Forgot password?</a>
       </main>
-    </Layout>
   );
 }

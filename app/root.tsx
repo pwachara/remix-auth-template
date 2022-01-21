@@ -1,4 +1,5 @@
 import {
+  json,
   Links,
   LiveReload,
   Meta,
@@ -6,21 +7,42 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  LoaderFunction,
   useLoaderData,
 } from "remix";
 
-import { useState } from "react"
+import {
+  getUserFromCookies,
+  UserWithoutPassword,
+} from "~/utils/auth/user.server";
 
 import type { MetaFunction } from "remix";
+import Layout from "./components/Layout";
 
 // https://remix.run/api/conventions#default-export
 // https://remix.run/api/conventions#route-filenames
 
+export const loader: LoaderFunction = async function ({ request }) {
+
+  const { user, newResponseHeaders } = await getUserFromCookies(request);
+
+  return json(
+    { user },
+    {
+      headers: newResponseHeaders,
+    }
+  );
+};
 
 export default function App() {
+
+  const { user }: { user: UserWithoutPassword | undefined } = useLoaderData()
+  
   return (
-    <Document> 
-        <Outlet />
+    <Document>
+        <Layout user={user}>
+          <Outlet />
+        </Layout> 
     </Document>
   );
 }
@@ -88,7 +110,7 @@ function Document({
   title?: string;
 }) {
 
-  const [ dataTheme, setDataTheme ] = useState("light")
+
   
   return (
     <html lang="en">
@@ -96,16 +118,6 @@ function Document({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         {title ? <title>{title}</title> : null}
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍾</text></svg>"
-        ></link>
-{/*
-        <link
-        rel="stylesheet"
-        href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
-        />
-*/}
         <Meta />
         <Links />
         <script src="https://cdn.tailwindcss.com"></script>
@@ -119,7 +131,3 @@ function Document({
     </html>
   );
 }
-/* 
-function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}<p>This is within the LAYOUT component</p></>;
-} */

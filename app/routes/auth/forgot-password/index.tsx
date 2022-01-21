@@ -70,7 +70,6 @@ export default function ForgotPassword() {
   const submission = useTransition();
   const formData = useActionData();
   return (
-    <Layout> 
       <main className="container">
         <Form method="post">
           {formData?.fieldErrors?.email && (
@@ -98,6 +97,5 @@ export default function ForgotPassword() {
         </Form>
         {formData?.alert && <p>{formData.alert}</p>}
       </main>
-    </Layout>
   );
 }

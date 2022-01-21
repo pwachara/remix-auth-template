@@ -1,6 +1,6 @@
 import { RemixEntry } from "@remix-run/react/components";
 import type { ReactNode } from "react";
-import { Link, Outlet } from "remix";
+import { Link } from "remix";
 
 export default function Layout({
   children,
@@ -11,7 +11,7 @@ export default function Layout({
 }) {
   return (
     <div className="flex flex-col h-screen">
-      <nav className="flex flex-row bg-blue-600 text-white justify-between h-16 p-4">
+      <nav className="flex flex-row bg-blue-600 text-blue-100 justify-between h-16 p-4">
         <ul>
           <li className="text-xl font-bold tracking-wider hover:text-yellow-500">
             <Link to="/">
@@ -42,7 +42,7 @@ export default function Layout({
         </ul>
       </nav>
       
-      <main className="flex flex-col-1">{children} </main>
+      <main>{children} </main>
     </div>
   );
 }
